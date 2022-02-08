@@ -16,16 +16,33 @@
 </head>
 <body>
     <div class="container mt-4">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-10">
                 <a href="create.php" class="btn btn-primary">Create New Student</a>
-                <hr>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-10">
                 <?php if ($students): ?>
-                    <?php foreach ($students as $student): ?>
-                           <p>
-                               <a href="show.php?id=<?php echo $student->id?>"><?php echo $student->name?></a>
-                           </p>
-                    <?php endforeach; ?>
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                                <th>Actions</th>
+                            </tr>
+                            <?php foreach ($students as $student): ?>
+                                <tr>
+                                    <td><?php echo $student->name ?></td>
+                                    <td><?php echo $student->email ?></td>
+                                    <td><?php echo ucfirst($student->gender) ?></td>
+                                    <td>
+                                        <a href="show.php?id=<?php echo $student->id; ?>" class="btn btn-info btn-sm">Details</a>
+                                        <a href="destroy.php?id=<?php echo $student->id; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
                 <?php else: ?>
                     <p>No Student found in database.</p>
                 <?php endif; ?>
